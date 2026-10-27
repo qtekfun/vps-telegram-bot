@@ -1,0 +1,6 @@
+/vps-telegram-bot
+*.swp
+*.swo
+*~
+.env
+*.token
