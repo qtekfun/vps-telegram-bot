@@ -226,6 +226,19 @@ publishes a `linux/amd64` + `linux/arm64` image to
 Actions are pinned by commit SHA and Dependabot keeps Go modules, Actions and the
 Docker base images current.
 
+From v0.1.1 on, every published image carries a signed build provenance
+attestation (Sigstore, through GitHub) and an SBOM. Check that an image was
+built by this repository's release workflow before deploying it:
+
+```sh
+gh attestation verify oci://ghcr.io/qtekfun/vps-telegram-bot:0.1.1 \
+  --repo qtekfun/vps-telegram-bot \
+  --signer-workflow qtekfun/vps-telegram-bot/.github/workflows/release.yml
+```
+
+Release tags (`v*`) cannot be moved or deleted, so a version always names the
+same commit.
+
 ## Security notes
 
 What the bot can do: list containers and read their state; read the last 200 log
